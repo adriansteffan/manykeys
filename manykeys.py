@@ -1,3 +1,13 @@
+"""
+ManyKeys.py v1.0.0 - Centralized Confidential Data Collection for Collaborative Online Studies
+<https://github.com/adriansteffan/manykeys>
+
+(c) Adrian Steffan <adrian.steffan [at] hotmail.de> <https://github.com/adriansteffan>
+(c) Till Müller <https://github.com/TillMueller>
+Licenced under GPLv3. See <https://raw.githubusercontent.com/adriansteffan/manykeys/main/LICENSE>
+"""
+
+
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
@@ -30,6 +40,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         data = private_key.public_key().export_key('PEM') + b';' + username.encode('utf-8')
         key_string = base64.urlsafe_b64encode(SHA256.new(data).digest() + data).decode('utf-8').rstrip("=")
+        print(len(base64.urlsafe_b64encode(SHA256.new(data).digest() + data).decode('utf-8'))-len(key_string))
 
         with open("keystring.txt", 'w') as f:
             f.write(key_string)
@@ -41,7 +52,7 @@ if __name__ == '__main__':
 
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
-        for file in os.path.join(os.getcwd(), sys.argv[1]):
+        for file in os.listdir(os.path.join(os.getcwd(), sys.argv[1])):
             if not file.endswith((".enc")):
                 continue
 
@@ -66,6 +77,7 @@ if __name__ == '__main__':
                 print("Could not decrypt file {}".format(file))
                 continue
 
+
             with open(os.path.join(output_dir, file[:-4]), "wb") as f:
                 f.write(data)
         print("Decrypting done.")
@@ -75,7 +87,7 @@ if __name__ == '__main__':
 from Crypto import Random
 
 # fix b64
-padding = 4 - (len(key_string) % 4)
+padding = (4 - (len(key_string) % 4)) % 4
 string = key_string + ("=" * padding)
 
 data_all = base64.urlsafe_b64decode(string)
