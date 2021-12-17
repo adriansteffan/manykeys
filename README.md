@@ -82,7 +82,7 @@ if (publicKeyString){
 
 ```javascript
 
-/* encryptring text before sending it to the backend */ 
+/* encrypting text before sending it to the backend */ 
 
 ManyKeys.encrypt(
     new TextEncoder().encode("SENSITIVE_DATA"), 
@@ -107,8 +107,8 @@ A CSPRNG then generates a 32 byte long key that is used to to symmetrically encr
 ## Roadmap/Todos
 
 * Package code for the releases page
-* minified version of the js library
-* GUI for using the python script
+* Minifiy the js library
+* Create GUI for using the python script
 
 
 ## Authors
