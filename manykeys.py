@@ -49,14 +49,15 @@ if __name__ == '__main__':
 
     else:
         output_dir = os.path.join(os.getcwd(), OUTPUT_DIR_NAME)
+        input_dir = os.path.join(os.getcwd(), sys.argv[1])
 
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
-        for file in os.listdir(os.path.join(os.getcwd(), sys.argv[1])):
+        for file in os.listdir(input_dir):
             if not file.endswith((".enc")):
                 continue
 
-            with open(file, "r") as f:
+            with open(os.path.join(input_dir, file), "r") as f:
                 enc_bytes = base64.b64decode(f.read())
 
             try:
