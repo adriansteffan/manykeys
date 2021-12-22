@@ -8,10 +8,10 @@ Licenced under GPLv3. See <https://raw.githubusercontent.com/adriansteffan/manyk
 """
 
 
-from Crypto.Protocol.KDF import PBKDF2
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Hash import SHAKE256, SHA256
+from Cryptodome.Protocol.KDF import PBKDF2
+from Cryptodome.PublicKey import RSA
+from Cryptodome.Cipher import AES, PKCS1_OAEP
+from Cryptodome.Hash import SHAKE256, SHA256
 
 import getpass
 
